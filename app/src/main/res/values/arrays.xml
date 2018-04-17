@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <string-array name="listArray">
+        <item>RTS</item>
+        <item>Sports Timing</item>
+    </string-array>
+
+    <string-array name="listValues">
+        <item>RTS</item>
+        <item>Sports Timing</item>
+    </string-array>
+
+    <string-array name="teamMemberLetter">
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
+        <item>D</item>
+    </string-array>
+    <string-array name="teamMode">
+        <item>Solo</item>
+        <item>Team</item>
+        <item>Mix</item>
+    </string-array>
+
+</resources>

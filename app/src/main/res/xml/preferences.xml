@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory
+        android:title="Settings">
+
+        <ListPreference
+            android:title="Set Server"
+            android:key="pref_server"
+            android:summary="\n(Click to edit)"
+            android:defaultValue="(empty)"
+            android:entries="@array/listArray"
+            android:entryValues="@array/listValues" />
+        <CheckBoxPreference
+            android:key="@string/pref_15_mins"
+            android:title="Time Limitation"
+            android:summary="Ignore chips repeated within 15 minutes"/>
+
+        <CheckBoxPreference
+            android:key="@string/pref_10_chips"
+            android:title="Alternation Limitation"
+            android:summary="Ignore chips repeated from the last 10 chips"/>
+
+        <ListPreference
+            android:defaultValue="Solo"
+            android:entries="@array/teamMode"
+            android:entryValues="@array/teamMode"
+            android:key="team_mode"
+            android:title="Team Mode"
+            android:summary="Solo / Team / Mix" />
+
+    </PreferenceCategory>
+    <Preference
+        android:key="version"
+        android:title="Version"
+        android:summary="@string/versionName"/>
+</PreferenceScreen>

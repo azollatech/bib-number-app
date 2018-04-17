@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.henneth.rtsBibNumber.MainActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/race_num_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Bib Number" />
+
+        <EditText
+            android:id="@+id/race_num"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="e.g.1000"
+            android:inputType="number" />
+
+        <com.henneth.rtsBibNumber.SegmentedRadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:orientation="horizontal"
+            android:id="@+id/team_member_letter"
+            android:checkedButton="@+id/button_one">
+
+            <RadioButton
+                android:id="@+id/A"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:button="@null"
+                android:gravity="center"
+                android:minHeight="33dip"
+                android:minWidth="40dip"
+                android:text="A"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/radio_colors" />
+
+            <RadioButton
+                android:id="@+id/B"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:button="@null"
+                android:gravity="center"
+                android:minHeight="33dip"
+                android:minWidth="40dip"
+                android:text="B"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/radio_colors" />
+
+            <RadioButton
+                android:id="@+id/C"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:button="@null"
+                android:gravity="center"
+                android:minHeight="33dip"
+                android:minWidth="40dip"
+                android:text="C"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/radio_colors" />
+
+            <RadioButton
+                android:id="@+id/D"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight=".25"
+                android:button="@null"
+                android:gravity="center"
+                android:minHeight="33dip"
+                android:minWidth="40dip"
+                android:text="D"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:textColor="@color/radio_colors" />
+
+        </com.henneth.rtsBibNumber.SegmentedRadioGroup>
+
+        <Button
+            android:id="@+id/btnSend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:text="Send" />
+
+        <ListView
+            android:id="@+id/tagListView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
+
+</RelativeLayout>
