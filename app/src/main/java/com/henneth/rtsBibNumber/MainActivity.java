@@ -170,7 +170,7 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
                                       int before, int count) {
 
                 // Clear checked button in button group
-                if (teamMemberLetter.getCheckedRadioButtonId() != -1){
+                if (teamMemberLetter.getCheckedRadioButtonId() != -1) {
                     teamMemberLetter.clearCheck();
                 }
 
@@ -178,6 +178,11 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
                 int pos = inputRaceNumber.getSelectionStart();
                 String s_num = s.toString().replaceAll("[^0-9]", "");
                 String s_letter = s.toString().replaceAll("[^A-Za-z]", "");
+                if (!teamModeOrNot.equals("Solo")) {
+                    if (s.toString().replaceAll("[^0-9]", "").length() > 3) {
+                        s_num = s_num.substring(0, 3);
+                    }
+                }
                 if (s.toString().replaceAll("[^0-9]", "").length() > 4) {
                     s_num = s_num.substring(0, 4);
                 }
