@@ -4,12 +4,14 @@
 
     <string-array name="listArray">
         <item>RTS</item>
-        <item>Sports Timing</item>
+        <item>Live Trail</item>
+        <item>Data transfer via WiFi</item>
     </string-array>
 
     <string-array name="listValues">
         <item>RTS</item>
-        <item>Sports Timing</item>
+        <item>Live Trail</item>
+        <item>WiFi</item>
     </string-array>
 
     <string-array name="teamMemberLetter">

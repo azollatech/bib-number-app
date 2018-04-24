@@ -59,7 +59,7 @@ import java.util.Date;
 
 import helper.SessionManager;
 
-public class  MainActivity extends AppCompatActivity implements postToServer.AsyncResponse, postToServerRTS.AsyncResponse, RadioGroup.OnCheckedChangeListener {
+public class  MainActivity extends AppCompatActivity implements postToServer.AsyncResponse, postToServerRTS.AsyncResponse, postToServerLiveTrail.AsyncResponse, AsyncSocketConnection.AsyncResponse, RadioGroup.OnCheckedChangeListener {
 
     public static String DEVICE_ADDRESS = "device_address";
     private static String mConnectedDeviceName = null;
@@ -554,8 +554,13 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
                 // post to server
                 if (server.equals("RTS")) {
                     new postToServerRTS(this).execute("http://m.racetimingsolutions.com/rfid-gun/v2", sEpc, time, android_id, ckpt_name, position);
-                } else if (server.equals("Sports Timing")) {
-                    new postToServer(this).execute("http://livetime.sportstiming.dk/LiveTimeService.asmx", sEpc, time, ckpt_name, deviceName, position);
+                } else if (server.equals("Live Trail")) {
+                    String port = prefs.getString("pref_port", "");
+                    new postToServerLiveTrail(this).execute("http://livetrail.net:" + port + "/rts?c=bvTvMJqxcQn5D2Fk", sEpc, time, android_id, ckpt_name, position);
+                } else if (server.equals("WiFi")){
+                    String ip = prefs.getString("pref_ip", "");
+                    String str = "*" + sEpc + "," + time + "," + android_id + "," + ckpt_name + "," + position + "#";
+                    new AsyncSocketConnection(ip, 44444, 10000, this).execute(str);
                 } else {
                     toast("Please set the destination server.");
                 }
@@ -620,7 +625,7 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
     /**
      * Toast
      */
-    private void toast(String message){
+    public void toast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
@@ -638,14 +643,19 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
             TagRecord t = incompleteTagRecord.get(0);
 
             SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-            String ckpt_name = prefs.getString("pref_ckpt_name", "empty");
+            String ckpt_name = checkpoint_name;
             String server = prefs.getString("pref_server", "empty");
 
             // post to server
             if (server.equals("RTS")) {
                 new postToServerRTS(this).execute("http://m.racetimingsolutions.com/rfid-gun/v2", t.sEpc, t.time, t.android_id, ckpt_name, t.position);
-            } else if (server.equals("Sports Timing")) {
-                new postToServer(this).execute("http://livetime.sportstiming.dk/LiveTimeService.asmx", t.sEpc, t.time, ckpt_name, t.deviceName, t.position);
+            } else if (server.equals("Live Trail")) {
+                String port = prefs.getString("pref_port", "");
+                new postToServerLiveTrail(this).execute("http://livetrail.net:" + port + "/rts?c=bvTvMJqxcQn5D2Fk", t.sEpc, t.time, t.android_id, ckpt_name, t.position);
+            } else if (server.equals("WiFi")){
+                String ip = prefs.getString("pref_ip", "");
+                String str = "*" + t.sEpc + "," + t.time + "," + t.android_id + "," + ckpt_name + "," + t.position + "#";
+                new AsyncSocketConnection(ip, 44444, 10000, this).execute(str);
             } else {
                 toast("Please set the destination server.");
             }
@@ -666,10 +676,14 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
         Toast.makeText(thisActivity, "Authentication Failed." , Toast.LENGTH_SHORT).show();
     }
 
+    public void errorMessageToast(String m) {
+        Toast.makeText(thisActivity, m , Toast.LENGTH_SHORT).show();
+    }
+
     public void sendOneIncompleteTag() {
         // get value from settings
         SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
-        String ckpt_name = prefs.getString("pref_ckpt_name", "empty");
+        String ckpt_name = checkpoint_name;
         String server = prefs.getString("pref_server", "empty");
 
         if (!incompleteTagRecord.isEmpty()) {
@@ -678,8 +692,13 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
             // post to server
             if (server.equals("RTS")) {
                 new postToServerRTS(this).execute("http://m.racetimingsolutions.com/rfid-gun/v2", t.sEpc, t.time, t.android_id, ckpt_name, t.position);
-            } else if (server.equals("Sports Timing")) {
-                new postToServer(this).execute("http://livetime.sportstiming.dk/LiveTimeService.asmx", t.sEpc, t.time, ckpt_name, t.deviceName, t.position);
+            } else if (server.equals("Live Trail")) {
+                String port = prefs.getString("pref_port", "");
+                new postToServerLiveTrail(this).execute("http://livetrail.net:" + port + "/rts?c=bvTvMJqxcQn5D2Fk", t.sEpc, t.time, t.android_id, ckpt_name, t.position);
+            } else if (server.equals("WiFi")){
+                String ip = prefs.getString("pref_ip", "");
+                String str = "*" + t.sEpc + "," + t.time + "," + t.android_id + "," + ckpt_name + "," + t.position + "#";
+                new AsyncSocketConnection(ip, 44444, 10000, this).execute(str);
             } else {
                 toast("Please set the destination server.");
             }

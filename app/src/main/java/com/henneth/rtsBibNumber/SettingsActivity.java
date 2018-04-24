@@ -27,6 +27,21 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
         Preference pref_team_mode = (Preference) findPreference("team_mode");
         pref_team_mode.setSummary("Current mode: " + pref_team_mode_string);
 
+        String pref_port_string = PreferenceManager.getDefaultSharedPreferences(this).getString("pref_port", "(empty)");
+        Preference pref_port = (Preference) findPreference("pref_port");
+        pref_port.setSummary("Current port: " + pref_port_string);
+
+        String pref_ip_string = PreferenceManager.getDefaultSharedPreferences(this).getString("pref_ip", "(empty)");
+        Preference pref_ip = (Preference) findPreference("pref_ip");
+        pref_ip.setSummary("Current IP address: " + pref_ip_string);
+
+        if (!pref_server_string.equals("Live Trail")) {
+            getPreferenceScreen().findPreference("pref_port").setEnabled(false);
+        }
+        if (!pref_server_string.equals("WiFi")) {
+            getPreferenceScreen().findPreference("pref_ip").setEnabled(false);
+        }
+
         setPreferenceChangeListener();
     }
 
@@ -48,6 +63,19 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Log.d("newValue", newValue.toString());
                 server_pref.setSummary("Current server: " + newValue.toString());
+
+                if (newValue.toString().equals("Live Trail")) {
+                    getPreferenceScreen().findPreference("pref_port").setEnabled(true);
+                } else {
+                    getPreferenceScreen().findPreference("pref_port").setEnabled(false);
+                }
+
+                if (newValue.toString().equals("WiFi")) {
+                    getPreferenceScreen().findPreference("pref_ip").setEnabled(true);
+                } else {
+                    getPreferenceScreen().findPreference("pref_ip").setEnabled(false);
+                }
+
                 return true;
             }
         });
@@ -58,6 +86,16 @@ public class SettingsActivity extends PreferenceActivity implements SharedPrefer
             public boolean onPreferenceChange(Preference preference, Object newValue) {
                 Log.d("newValue", newValue.toString());
                 team_mode_pref.setSummary("Current mode: " + newValue.toString());
+                return true;
+            }
+        });
+
+        final EditTextPreference pref_ip = (EditTextPreference) findPreference("pref_ip");
+        pref_ip.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                Log.d("newValue", newValue.toString());
+                pref_ip.setSummary("Current IP address: " + newValue.toString());
                 return true;
             }
         });
