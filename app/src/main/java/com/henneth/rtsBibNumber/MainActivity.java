@@ -559,7 +559,7 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
                     new postToServerLiveTrail(this).execute("http://livetrail.net:" + port + "/rts?c=bvTvMJqxcQn5D2Fk", sEpc, time, android_id, ckpt_name, position);
                 } else if (server.equals("WiFi")){
                     String ip = prefs.getString("pref_ip", "");
-                    String str = "*" + sEpc + "," + time + "," + android_id + "," + ckpt_name + "," + position + "#";
+                    String str = "*" + sEpc + "," + time + "," + android_id + "," + ckpt_name + "," + position +"," + "0" + "#";
                     new AsyncSocketConnection(ip, 44444, 10000, this).execute(str);
                 } else {
                     toast("Please set the destination server.");
@@ -654,7 +654,7 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
                 new postToServerLiveTrail(this).execute("http://livetrail.net:" + port + "/rts?c=bvTvMJqxcQn5D2Fk", t.sEpc, t.time, t.android_id, ckpt_name, t.position);
             } else if (server.equals("WiFi")){
                 String ip = prefs.getString("pref_ip", "");
-                String str = "*" + t.sEpc + "," + t.time + "," + t.android_id + "," + ckpt_name + "," + t.position + "#";
+                String str = "*" + t.sEpc + "," + t.time + "," + t.android_id + "," + ckpt_name + "," + t.position +"," + "0" + "#";
                 new AsyncSocketConnection(ip, 44444, 10000, this).execute(str);
             } else {
                 toast("Please set the destination server.");
@@ -697,7 +697,7 @@ public class  MainActivity extends AppCompatActivity implements postToServer.Asy
                 new postToServerLiveTrail(this).execute("http://livetrail.net:" + port + "/rts?c=bvTvMJqxcQn5D2Fk", t.sEpc, t.time, t.android_id, ckpt_name, t.position);
             } else if (server.equals("WiFi")){
                 String ip = prefs.getString("pref_ip", "");
-                String str = "*" + t.sEpc + "," + t.time + "," + t.android_id + "," + ckpt_name + "," + t.position + "#";
+                String str = "*" + t.sEpc + "," + t.time + "," + t.android_id + "," + ckpt_name + "," + t.position +"," + "0" + "#";
                 new AsyncSocketConnection(ip, 44444, 10000, this).execute(str);
             } else {
                 toast("Please set the destination server.");
